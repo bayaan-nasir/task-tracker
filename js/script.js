@@ -1,24 +1,42 @@
 let referencedDate = new Date().toDateString();
 
-
-if (localStorage.getItem("tasks") === null) {
-	localStorage.setItem("tasks", "[]")
+function signIn() {
+	
+	let username = document.getElementById('username').value
+	let password = document.getElementById('password').value
+	console.log(username, password)
+	if (localStorage.getItem(username) === null) {
+		localStorage.setItem(username, password)
+		sessionStorage.setItem('currentUser', username)
+		window.location.href = "pages/dashboard.html"
+	} else {
+		if (password === localStorage.getItem(username)) {
+			sessionStorage.setItem('currentUser', username)
+			window.location.href = "pages/dashboard.html"
+		} else {
+			alert('Incorrect Password')
+		}
+	}
 }
-let task_string = localStorage.getItem("tasks");
+
+if (localStorage.getItem(`${sessionStorage.getItem('currentUser')}-tasks`) === null) {
+	localStorage.setItem(`${sessionStorage.getItem('currentUser')}-tasks`, "[]")
+}
+let task_string = localStorage.getItem(`${sessionStorage.getItem('currentUser')}-tasks`);
 let tasks = JSON.parse(task_string);
 
-function deleteAll(page) {
+function deleteAll() {
 	let new_tasks = tasks.filter(function (task){ return task.date !== referencedDate })
 	let list = JSON.stringify(new_tasks)
-	localStorage.setItem("tasks", list)
-	refreshTasks(page)
+	localStorage.setItem(`${sessionStorage.getItem('currentUser')}-tasks`, list)
+	location.reload()
 }
 
 function deleteOne(index, page) {
 	tasks.splice(index, 1)
 	console.log(tasks)
 	let list = JSON.stringify(tasks)
-	localStorage.setItem("tasks", list)
+	localStorage.setItem(`${sessionStorage.getItem('currentUser')}-tasks`, list)
 	refreshTasks(page)
 }
 
@@ -29,6 +47,7 @@ function updateDate(page) {
 
 function updateTask() {
 	document.getElementById("tasks").innerHTML = ''
+	document.getElementById("username").innerHTML = sessionStorage.getItem('currentUser')
 	tasks.map((task, index) => {
 		if (task.date === referencedDate){
 			document.getElementById("tasks").innerHTML += `<li id='task-${index}' class="task-item ${task.complete ? 'completed-task':''}">
@@ -58,7 +77,6 @@ function updateTask() {
 function updateActiveTask() {
 	document.getElementById("tasks-active").innerHTML = ''
 	tasks.map((task, index) => {
-		console.log
 		if (!task.complete && task.date === referencedDate){
 			document.getElementById("tasks-active").innerHTML += `<li id='task-${index}'>
 			<input onChange='toggleCompleted(${index}, "active")' type="checkbox" ${task.complete ? 'checked' : ''}>
@@ -115,7 +133,7 @@ function refreshTasks(page) {
 function toggleCompleted(id, page) {
 	tasks[id].complete = !tasks[id].complete
 	let list = JSON.stringify(tasks)
-	localStorage.setItem("tasks", list) 
+	localStorage.setItem(`${sessionStorage.getItem('currentUser')}-tasks`, list) 
 	refreshTasks(page)
 }
 
@@ -132,7 +150,7 @@ function submitTask(page) {
 		}
 	)
 	let list = JSON.stringify(tasks)
-	localStorage.setItem("tasks", list) 
+	localStorage.setItem(`${sessionStorage.getItem('currentUser')}-tasks`, list) 
 	document.getElementById("task-name").value = ''
 	document.getElementById("task-desc").value = ''
 	refreshTasks(page)
