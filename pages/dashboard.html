@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task Tracker | Dashboard</title>
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<main>
+		<div class="side-nav">
+			<h2 class="logo">Task Tracker</h2>
+			<button onclick="document.getElementById('add-task').show()" class="add-task-btn">
+				<span>Add Task</span>
+				<span class="icon">
+					<img src="../assets/add.svg" alt="Add">
+				</span>
+			</button>
+			<div class="nav-container">
+				<ul>
+					<li class="active"><a href="./dashboard.html">Dashboard</a></li>
+					<li><a href="./active.html">Active</a></li>
+					<li><a href="./complete.html">Complete</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main">
+			<div class="page-header">Dashboard</div>
+			<div class="page-content">
+				<section class="welcome">
+					<h2>Hello, User</h2>
+					<span>What do you want to do today?</span>
+				</section>
+
+				<section class="task-container">
+					<div>
+						<div>
+							<span>Today's Tasks</span>
+							<a href="#">Delete All</a>
+						</div>
+
+						<ul>
+							<li>
+								<input type="checkbox">
+								<span>Buy groceries</span>
+							</li>
+							<li>
+								<input type="checkbox">
+								<span>Buy groceries</span>
+							</li>
+							<li>
+								<input type="checkbox">
+								<span>Buy groceries</span>
+							</li>
+							<li>
+								<input type="checkbox">
+								<span>Buy groceries</span>
+							</li>
+							<li>
+								<input type="checkbox">
+								<span>Buy groceries</span>
+							</li>
+						</ul>
+					</div>
+					<div class="summary-section">
+						<span>Monday, 11th March 2024</span>
+						<div style="background-color: #ba5112;">
+							<img src="../assets/check.svg" alt="Check">
+							<span>40%</span>
+							<span>Completed Tasks</span>
+						</div>
+						<div style="background-color: #edb046;">
+							<img src="../assets/clock.svg" alt="Clock">
+							<span>60%</span>
+							<span>Active Tasks</span>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</main>
+	<script src="js/script.js"></script>
+</body>
+</html>
