@@ -6,11 +6,21 @@
 	<title>Task Tracker | Dashboard</title>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body onload="updateTask()">
+	<div id="add-task-modal">
+		<form method="dialog">
+			<input name="task-name" id="task-name" type="text" placeholder="Add Task" required>
+			<textarea  name="task-desc" id="task-desc" placeholder="Enter Description"></textarea>
+			<div class="button-group">
+				<button onclick="document.getElementById('add-task-modal').style.display = 'none'"  class="btn btn-outline">Cancel</button>
+				<input type="submit" onclick="submitTask('main')" value="Save" class="btn btn-primary">
+			</div>
+		</form>
+	</div>
 	<main>
 		<div class="side-nav">
-			<h2 class="logo">Task Tracker</h2>
-			<button onclick="document.getElementById('add-task').show()" class="add-task-btn">
+			<a href="./../index.html" class="logo">Task Tracker</a>
+			<button onclick="document.getElementById('add-task-modal').style.display = 'flex'" class="add-task-btn">
 				<span>Add Task</span>
 				<span class="icon">
 					<img src="../assets/add.svg" alt="Add">
@@ -36,42 +46,23 @@
 					<div>
 						<div>
 							<span>Today's Tasks</span>
-							<a href="#">Delete All</a>
+							<button onclick="deleteAll('main')" class="link">Delete All</button>
 						</div>
 
-						<ul>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
+						<ul id="tasks">
+
 						</ul>
 					</div>
 					<div class="summary-section">
-						<span>Monday, 11th March 2024</span>
+						<span><input type="date" id="date" name="date" onchange="updateDate('main')"></span>
 						<div style="background-color: #ba5112;">
 							<img src="../assets/check.svg" alt="Check">
-							<span>40%</span>
+							<span id="percent-complete"></span>
 							<span>Completed Tasks</span>
 						</div>
 						<div style="background-color: #edb046;">
 							<img src="../assets/clock.svg" alt="Clock">
-							<span>60%</span>
+							<span id="percent-remaining"></span>
 							<span>Active Tasks</span>
 						</div>
 					</div>
@@ -79,6 +70,6 @@
 			</div>
 		</div>
 	</main>
-	<script src="js/script.js"></script>
+	<script src="../js/script.js"></script>
 </body>
 </html>

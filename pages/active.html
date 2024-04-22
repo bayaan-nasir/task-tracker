@@ -6,11 +6,21 @@
 	<title>Task Tracker | Active</title>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body onload="updateActiveTask()">
+	<div id="add-task-modal">
+		<form method="dialog">
+			<input name="task-name" id="task-name" type="text" placeholder="Add Task" required>
+			<textarea  name="task-desc" id="task-desc" placeholder="Enter Description"></textarea>
+			<div class="button-group">
+				<button onclick="document.getElementById('add-task-modal').style.display = 'none'"  class="btn btn-outline">Cancel</button>
+				<input type="submit" onclick="submitTask('active')" value="Save" class="btn btn-primary">
+			</div>
+		</form>
+	</div>
 	<main>
 		<div class="side-nav">
-			<h2 class="logo">Task Tracker</h2>
-			<button class="add-task">
+			<a href="./../index.html" class="logo">Task Tracker</a>
+			<button onclick="document.getElementById('add-task-modal').style.display = 'flex'" class="add-task-btn">
 				<span>Add Task</span>
 				<span class="icon">
 					<img src="../assets/add.svg" alt="Add">
@@ -31,31 +41,17 @@
 					<div>
 						<div>
 							<span>Today's Active Tasks</span>
-							<span>Monday, 11th March 2024</span>
+							<span><input type="date" id="date" name="date"></span>
 						</div>
 
-						<ul>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
-							<li>
-								<input type="checkbox">
-								<span>Buy groceries</span>
-							</li>
+						<ul id="tasks-active">
+
 						</ul>
 					</div>
 				</section>
 			</div>
 		</div>
 	</main>
+	<script src="../js/script.js"></script>
 </body>
 </html>
